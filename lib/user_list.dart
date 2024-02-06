@@ -1,3 +1,4 @@
+import 'package:admin_app/booking_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,9 @@ class _user_listState extends State<user_list> {
       ),
       body: Column(
         children: [
-          SizedBox(height: width*0.012,),
+          SizedBox(
+            height: width * 0.012,
+          ),
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
@@ -40,46 +43,81 @@ class _user_listState extends State<user_list> {
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
                         // width:width*0.01,
-                        height:width*0.07,
+                        height: width * 0.07,
                         decoration: BoxDecoration(
-                          color: colorPage.primaryColor,
-                          borderRadius: BorderRadius.circular(width*0.03)
-                        ),
+                            color: colorPage.primaryColor,
+                            borderRadius: BorderRadius.circular(width * 0.03)),
 
                         // margin:EdgeInsets.all(width*0.01),
 
-                        margin: EdgeInsets.only(left: width*0.02,right: width*0.02),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        margin: EdgeInsets.only(
+                            left: width * 0.02, right: width * 0.02),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Text(data[index]["name"],style: TextStyle(
-                              fontSize: width*0.012,
-                              color: Colors.white
-                            )),
-                            SizedBox(height: width*0.01,),
-                            Text(data[index]["email"],
-                                style: TextStyle(
-                                    fontSize: width*0.012,
-                                    color: Colors.white
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(data[index]["name"],
+                                    style: TextStyle(
+                                        fontSize: width * 0.012,
+                                        color: Colors.white)),
+                                SizedBox(
+                                  height: width * 0.01,
+                                ),
+                                Text(data[index]["email"],
+                                    style: TextStyle(
+                                        fontSize: width * 0.012,
+                                        color: Colors.white)),
+                                SizedBox(
+                                  height: width * 0.01,
+                                ),
+                                Text(data[index].id,
+                                    style: TextStyle(
+                                      fontSize: width * 0.012,
+                                      color: Colors.white,
+                                    )),
+                              ],
+                            ),
+                        InkWell(
+
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                  builder: (context) => booking_page(
+                                    id: data[index].id,
+                                  ),
+                                ));
+                          },
+                          child: Container(
+                            width: width * 0.06,
+                            height: width * 0.04,
+                            child: Center(
+                                child: Text(
+                                  "Bookings",
+                                  style: TextStyle(
+                                      fontSize: width * 0.012,
+                                      fontWeight: FontWeight.w600),
                                 )),
-                            SizedBox(height: width*0.01,),
-                            Text(data[index]["password"],
-                                style: TextStyle(
-                                    fontSize: width*0.012,
-                                    color: Colors.white,
-                                )),
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(
+                                    width * 0.01)),
+                          ),
+                        ),
                           ],
                         ),
                       );
-                    }, separatorBuilder: (BuildContext context, int index) {
-                      return SizedBox(height: width*0.01,);
-                  },
+                    },
+                    separatorBuilder: (BuildContext context, int index) {
+                      return SizedBox(
+                        height: width * 0.01,
+                      );
+                    },
                   );
                 }),
           )
-
-
-
         ],
       ),
     );

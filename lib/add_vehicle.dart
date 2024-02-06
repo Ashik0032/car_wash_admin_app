@@ -10,7 +10,7 @@ class add_vehicle extends StatefulWidget {
 }
 
 class _add_vehicleState extends State<add_vehicle> {
-  TextEditingController car_name_controller = TextEditingController();
+  TextEditingController vehicle_name_controller = TextEditingController();
   TextEditingController model_name_controller1 = TextEditingController();
   String? dropdown_value;
   String? dropdown1_value;
@@ -40,7 +40,7 @@ class _add_vehicleState extends State<add_vehicle> {
                 height: width * 0.08,
                 width: width * 0.4,
                 child: TextFormField(
-                  controller: car_name_controller,
+                  controller: vehicle_name_controller,
                   textCapitalization: TextCapitalization.words,
                   keyboardType: TextInputType.multiline,
                   textInputAction: TextInputAction.done,
@@ -79,8 +79,8 @@ class _add_vehicleState extends State<add_vehicle> {
                   FirebaseFirestore.instance
                       .collection("Vehicle")
                       .doc("Vehicles")
-                      .update({car_name_controller.text: []});
-                  car_name_controller.clear();
+                      .update({vehicle_name_controller.text: []});
+                  vehicle_name_controller.clear();
                 },
                 child: Container(
                   height: width * 0.03,
@@ -275,7 +275,7 @@ class _add_vehicleState extends State<add_vehicle> {
                               child: ListView.separated(
                                 shrinkWrap: true,
                                 scrollDirection: Axis.horizontal,
-                                itemCount: DataMap[key[index]].length,
+                                itemCount: modelList.length,
                                 itemBuilder: (context, index) {
                                   return Container(
                                     height: width * 0.02,

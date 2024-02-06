@@ -1,10 +1,13 @@
+import 'package:admin_app/Service_theme.dart';
 import 'package:admin_app/add_vehicle.dart';
 import 'package:admin_app/banner_page.dart';
+import 'package:admin_app/booking_page.dart';
 import 'package:admin_app/user_list.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'booking_all.dart';
 import 'main.dart';
 
 class first_page extends StatefulWidget {
@@ -90,7 +93,7 @@ class _first_pageState extends State<first_page> {
               ),
               GestureDetector(
                 onTap: () {
-
+                  Navigator.push(context, CupertinoPageRoute(builder: (context) =>booking_all(),));
                 },
                 child: Container(
                   height: width * 0.15,
@@ -100,6 +103,25 @@ class _first_pageState extends State<first_page> {
                         "BOOKING",
                         style: TextStyle(
                             color: Colors.white, fontSize: width * 0.02),
+                      )),
+                  decoration: BoxDecoration(
+                      color: colorPage.primaryColor,
+                      borderRadius: BorderRadius.circular(width * 0.02)),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context, CupertinoPageRoute(builder: (context) => Service_theme(),));
+                },
+                child: Container(
+                  height: width * 0.15,
+                  width: width * 0.15,
+                  child: Center(
+                      child: Text(
+                        textAlign: TextAlign.center,
+                        "SERVICE\nTHEME",
+                        style:
+                        TextStyle(color: Colors.white, fontSize: width * 0.02),
                       )),
                   decoration: BoxDecoration(
                       color: colorPage.primaryColor,
