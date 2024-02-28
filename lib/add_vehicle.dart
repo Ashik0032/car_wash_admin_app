@@ -258,10 +258,23 @@ class _add_vehicleState extends State<add_vehicle> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Container(
-                                    height: width*0.02,
-                                    width: width*0.02,
-                                    child: Icon(Icons.delete,color: Colors.red,)),
+                                InkWell(
+                                  onTap: () {
+                                    FirebaseFirestore.instance.collection("Vehicle").doc("Vehicles").update(
+                                        {
+                                          key[index]:FieldValue.arrayRemove([DataMap[key[index]]]),
+                                          // modelList[index]:FieldValue.arrayRemove([DataMap]),
+                                        });
+                                    setState(() {
+                                    });
+
+                                  },
+
+                                  child: Container(
+                                      height: width*0.02,
+                                      width: width*0.02,
+                                      child: Icon(Icons.delete,color: Colors.blueAccent,)),
+                                ),
                                 Container(
                                   child: Text(key[index],style: TextStyle(fontSize: width*0.015,
                                   color: Colors.black)),

@@ -1,4 +1,4 @@
-
+import 'package:admin_app/count_admin.dart';
 import 'package:admin_app/firebase_options.dart';
 import 'package:admin_app/first_page.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -28,7 +28,7 @@ class carWash extends StatelessWidget {
       },
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: first_page(),
+        home: count_admin(),
       ),
     );
   }

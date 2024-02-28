@@ -1,3 +1,4 @@
+import 'package:admin_app/Model/user_model.dart';
 import 'package:admin_app/booking_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -27,23 +28,28 @@ class _user_listState extends State<user_list> {
             height: width * 0.012,
           ),
           Expanded(
-            child: StreamBuilder<QuerySnapshot>(
+            child: StreamBuilder(
                 stream: FirebaseFirestore.instance
                     .collection('carwash')
-                    .snapshots(),
+                    .snapshots().map((snapshots){
+                      return snapshots.docs.map((doc){
+                        return userModel.fromMap(doc.data());
+                      }).toList();
+                }),
                 builder: (context, snapshot) {
                   if (!snapshot.hasData) {
                     return Center(child: CircularProgressIndicator());
                   }
 
-                  var data = snapshot.data!.docs;
+                  List<userModel> data=snapshot.data!;
+
 
                   return ListView.separated(
                     itemCount: data.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
                         // width:width*0.01,
-                        height: width * 0.07,
+                        height: width * 0.1,
                         decoration: BoxDecoration(
                             color: colorPage.primaryColor,
                             borderRadius: BorderRadius.circular(width * 0.03)),
@@ -55,24 +61,41 @@ class _user_listState extends State<user_list> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
+                            Container(
+                              height: width*0.07,
+                              width: width*0.07,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(image: NetworkImage(data[index].images!)),
+                                  // color: Colors.white,
+                                  borderRadius: BorderRadius.circular(
+                                      width * 0.01)),
+                            ),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(data[index]["name"],
+                                Text(data[index].name!,
                                     style: TextStyle(
                                         fontSize: width * 0.012,
                                         color: Colors.white)),
                                 SizedBox(
                                   height: width * 0.01,
                                 ),
-                                Text(data[index]["email"],
+                                Text(data[index].email!,
                                     style: TextStyle(
                                         fontSize: width * 0.012,
                                         color: Colors.white)),
                                 SizedBox(
                                   height: width * 0.01,
                                 ),
-                                Text(data[index].id,
+                                Text(data[index].phoneNumber!,
+                                    style: TextStyle(
+                                      fontSize: width * 0.012,
+                                      color: Colors.white,
+                                    )),
+                                SizedBox(
+                                  height: width * 0.01,
+                                ),
+                                Text(data[index].id!,
                                     style: TextStyle(
                                       fontSize: width * 0.012,
                                       color: Colors.white,
@@ -86,7 +109,7 @@ class _user_listState extends State<user_list> {
                                 context,
                                 CupertinoPageRoute(
                                   builder: (context) => booking_page(
-                                    id: data[index].id,
+                                    id: data[index].id!,
                                   ),
                                 ));
                           },

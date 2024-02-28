@@ -52,8 +52,8 @@ class _booking_allState extends State<booking_all> {
 
                         child: ListTile(
                             leading:  Container(
-                                height: width*0.1,
-                                width: width*0.1,
+                                height: width*0.2,
+                                width: width*0.07,
                                 // color: Colors.red,
                                 child: Image.network(data[index].images)),
                             title: Column(
@@ -86,10 +86,9 @@ class _booking_allState extends State<booking_all> {
                                 InkWell(
                                   onTap: () {
                                     status="Accept";
-                                    FirebaseFirestore.instance.collection("booking").doc(data[index].id).update(
+                                   FirebaseFirestore.instance.collection("booking").doc(data[index].id).update(
                                         {
-
-                                          "status":status.toString()
+                                          "status":status
                                         });
                                   },
                                   child: Container(
@@ -116,7 +115,7 @@ class _booking_allState extends State<booking_all> {
                                     status="reject";
                                     FirebaseFirestore.instance.collection("booking").doc(data[index].id).update(
                                         {
-                                          "status":status.toString()
+                                          "status":status
                                         });
                                   },
                                   child: Container(
@@ -146,7 +145,7 @@ class _booking_allState extends State<booking_all> {
                                     status="serviced";
                                     FirebaseFirestore.instance.collection("booking").doc(data[index].id).update(
                                         {
-                                          "status":status.toString()
+                                          "status":status
                                         });
                                   },
                                   child: Container(

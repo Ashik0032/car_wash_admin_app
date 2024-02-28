@@ -22,7 +22,7 @@ class _booking_pageState extends State<booking_page> {
       ),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance.collection("booking").
-        where("id",isEqualTo: widget.id).snapshots().map((snapshots){
+        where("userid",isEqualTo: widget.id).snapshots().map((snapshots){
           return snapshots.docs.map((doc){
             return BookingModel.fromMap(doc.data());
           }).toList();
@@ -57,42 +57,42 @@ class _booking_pageState extends State<booking_page> {
                                 height: width*0.1,
                                 width: width*0.15,
                                 child: Image.network(data[index].images)),
-                            Text("service_vehicle           :${data[index].serviceVehicle}",
+                            Text("Service Vehicle           :${data[index].serviceVehicle}",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w600,
                                     fontSize: width*0.015
                                 )),
-                            Text("pic_a_service              :${data[index].picService}",
+                            Text("Pic Service              :${data[index].picService}",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w600,
                                     fontSize: width*0.015
                                 )),
-                            Text("pic_your_comfort       :${data[index].picYourComfort}",
+                            Text("Pic your Comfort       :${data[index].picYourComfort}",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w600,
                                     fontSize: width*0.015
                                 )),
-                            Text("take_a_date                 :${data[index].takeDate}",
+                            Text("Take Date                 :${data[index].takeDate}",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w600,
                                     fontSize: width*0.015
                                 )),
-                            Text("pic_slot                        :${data[index].picSlot}",
+                            Text("Pic Slot                        :${data[index].picSlot}",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w600,
                                     fontSize: width*0.015
                                 )),
-                            Text("add_your_note            :${data[index].addYourNote}",
+                            Text("Add Your Note            :${data[index].addYourNote}",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w600,
                                     fontSize: width*0.015
                                 )),
-                            Text("add_your_location      :${data[index].addYourLocation}",
+                            Text("Add Your Location      :${data[index].addYourLocation}",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w600,
                                     fontSize: width*0.015
                                 )),
-                            Text("payment_method       :${data[index].paymentMethod}",
+                            Text("Payment Method       :${data[index].paymentMethod}",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w600,
                                     fontSize: width*0.015
